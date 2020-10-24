@@ -47,6 +47,7 @@ btn2.addEventListener("click", function(){
   When response, render the HTML with ciphertext.
 */
 btn3.addEventListener("click", function(){
+   if((document.getElementById("pubicKey").value !=="")&&(document.getElementById("privateKey").value!=="")){
     var plaintext = document.getElementById("plaintext").value;
     var request = new XMLHttpRequest();
     const key = getPubKey(keyUsing);
@@ -64,6 +65,10 @@ btn3.addEventListener("click", function(){
         renderText("ciphertext", request.responseText);
     }
     request.send(myJSON);
+   }else{
+    window.alert("You need to get a pair of keys");
+    document.getElementById("plaintext").value="";
+   }
 });
 
 /*Use the decryption API, 
@@ -71,23 +76,28 @@ btn3.addEventListener("click", function(){
   When response, render the HTML with plaintext.
 */
 btn4.addEventListener("click", function(){
-    var ciphertext = document.getElementById("ciphertext").value;
-    var request = new XMLHttpRequest();
-    const key = getPriKey(keyUsing);
-    var message = {
-        "ciphertext" : ciphertext,
-        "privateKey" : key
-    };
-    var myJSON = JSON.stringify(message);
-    request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/decryption/");
-    request.setRequestHeader("Content-type", "application/json");
-    request.onload = function(){
-        // var enc = new TextDecoder("utf-8");
-        // var result = enc.decode(request.responseText);
+    if((document.getElementById("pubicKey").value !=="")&&(document.getElementById("privateKey").value!=="")){
+        var ciphertext = document.getElementById("ciphertext").value;
+        var request = new XMLHttpRequest();
+        const key = getPriKey(keyUsing);
+        var message = {
+            "ciphertext" : ciphertext,
+            "privateKey" : key
+        };
+        var myJSON = JSON.stringify(message);
+        request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/decryption/");
+        request.setRequestHeader("Content-type", "application/json");
+        request.onload = function(){
+            // var enc = new TextDecoder("utf-8");
+            // var result = enc.decode(request.responseText);
+            document.getElementById("plaintext").value="";
+            renderText("plaintext", request.responseText);
+        }
+        request.send(myJSON);
+    }else{
+        window.alert("You need to get a pair of keys");
         document.getElementById("plaintext").value="";
-        renderText("plaintext", request.responseText);
     }
-    request.send(myJSON);
 });
 
 function renderText(id, data){
