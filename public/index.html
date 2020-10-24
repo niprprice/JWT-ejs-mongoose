@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleKeyGenerator</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+    <header id="main-header">
+        <div class="container">
+            <h1>A simple example of asymmetric encryption</h1>
+        </div>
+    </header>
+    <nav id="main">
+        <div class = "showcase">
+            <h1 class="name">Key Generation</h1>
+            <form id="keygen">
+                <div>
+                    <label>Public Key: </label>
+                    <textarea name="publicKey" id="pubicKey"></textarea>
+                </div>
+                <div>
+                    <label>Private Key: </label>
+                    <textarea name="privateKey" id="privateKey"></textarea>
+                </div>
+                <input class="button" id = "getKeys" type="button" value="GET KEYS" name="getKeys">
+                <h>You can use the "GET KEYS" botton to randomly get a pair of keys from our database</h>
+                <p>
+                <input class="button" id = "genKeys" type="button" value="GENERATE KEYS" name="genKeys">
+                <h>You can use the "GENERATE KEYS" botton to randomly generate a new pair of keys</h>
+            </form>
+        </div>
+
+        <div style="margin-top: 50px;"></div>
+
+        <div class = "showcase">
+            <h1 class="name">Encryption and Decryption</h1>
+            <form id="encryption">
+                <div>
+                    <label>Plaintext: </label>
+                    <textarea id="plaintext"></textarea>
+                </div>
+                <div id>
+                    <label>Ciphertext: </label>
+                    <textarea id="ciphertext"></textarea>
+                </div>
+                <div>
+                    <input class="button" id = "encrypt" type="button" value="ENCRYPT" name="encrypt">
+                    <input class="button" id = "decrypt" type="button" value="DECRYPT" name="decrypt">
+                </div>
+            </form>
+        </div>
+    </nav>
+    <script src="main.js"></script>
+</body>
+</html>
