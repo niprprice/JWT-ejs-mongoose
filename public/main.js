@@ -47,7 +47,10 @@ btn2.addEventListener("click", function(){
   When response, render the HTML with ciphertext.
 */
 btn3.addEventListener("click", function(){
-   if((document.getElementById("pubicKey").value !=="")&&(document.getElementById("privateKey").value!=="")){
+   if(document.getElementById("plaintext").value == ""){
+    window.alert("You need to input plaintext");
+    document.getElementById("plaintext").value="";
+   }else if((document.getElementById("pubicKey").value !=="")&&(document.getElementById("privateKey").value!=="")){
     var plaintext = document.getElementById("plaintext").value;
     var request = new XMLHttpRequest();
     const key = getPubKey(keyUsing);
@@ -76,7 +79,10 @@ btn3.addEventListener("click", function(){
   When response, render the HTML with plaintext.
 */
 btn4.addEventListener("click", function(){
-    if((document.getElementById("pubicKey").value !=="")&&(document.getElementById("privateKey").value!=="")){
+    if(document.getElementById("ciphertext").value == ""){
+        window.alert("You need to input ciphertext");
+        document.getElementById("ciphertext").value="";
+    }else if((document.getElementById("pubicKey").value !=="")&&(document.getElementById("privateKey").value!=="")){
         var ciphertext = document.getElementById("ciphertext").value;
         var request = new XMLHttpRequest();
         const key = getPriKey(keyUsing);
@@ -96,7 +102,7 @@ btn4.addEventListener("click", function(){
         request.send(myJSON);
     }else{
         window.alert("You need to get a pair of keys");
-        document.getElementById("plaintext").value="";
+        document.getElementById("ciphertext").value="";
     }
 });
 
