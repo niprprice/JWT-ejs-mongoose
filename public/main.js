@@ -13,7 +13,7 @@ var url = self.location.host;
  */
 btn1.addEventListener("click", function(){
     var getKeys = new XMLHttpRequest();
-    getKeys.open("GET", "http://"+url +"/api/keys/getKeyPair");
+    getKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/getKeyPair");
     getKeys.onload = function(){
         var keyPair = JSON.parse(getKeys.responseText);
         clearKeyArea();
@@ -31,7 +31,7 @@ btn1.addEventListener("click", function(){
  */
 btn2.addEventListener("click", function(){
     var genKeys = new XMLHttpRequest();
-    genKeys.open("GET", "http://"+url +"/api/keys/genKeyPair");
+    genKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/genKeyPair");
     genKeys.onload = function(){
         var keyPair = JSON.parse(genKeys.responseText);
         clearKeyArea();
@@ -55,7 +55,7 @@ btn3.addEventListener("click", function(){
         "publicKey" : key
     };
     var myJSON = JSON.stringify(message);
-    request.open("POST", "http://"+url +"/api/encryption/");
+    request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/encryption/");
     request.setRequestHeader("Content-type", "application/json");
     request.onload = function(){
         // var enc = new TextDecoder("utf-8");
@@ -79,7 +79,7 @@ btn4.addEventListener("click", function(){
         "privateKey" : key
     };
     var myJSON = JSON.stringify(message);
-    request.open("POST", "http://"+url +"/api/decryption/");
+    request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/decryption/");
     request.setRequestHeader("Content-type", "application/json");
     request.onload = function(){
         // var enc = new TextDecoder("utf-8");
