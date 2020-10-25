@@ -11,19 +11,13 @@ const { StringDecoder } = require('string_decoder');
 router.post('/', (req,res) =>{
     try{
         console.log("Plaintext: " + String(req.body.plaintext));
-        var plaintext = new Uint8Array();
-        plaintext = stringToUint(req.body.plaintext);
+        plaintext = new Uint8Array(Buffer.from(req.body.plaintext));
         console.log(plaintext);
         var publicKey = req.body.publicKey;
         console.log(publicKey);
         console.log("\nLength of n:" + publicKey.n.length);
         usingKey.encrypt(plaintext, publicKey).then((result) => {
-            // console.log(result);
-            // console.log("\nLength of Cipher Array:" + result.length);
-            // const decoder = new StringDecoder('utf8');
-            // var message = decoder.write(result);
-            // console.log(message);
-            // console.log("\nLength of Cipher Text:" + message.length);
+            console.log(result);
             return result
         }).then((message) => res.send(message));
 
@@ -34,17 +28,5 @@ router.post('/', (req,res) =>{
     
 })
 
-//Converting a String to a Unit8Array object
-function stringToUint(string) {
-    //var string = btoa(unescape(encodeURIComponent(string))),
-    //Buffer.from(unescape(encodeURIComponent(string))).toString('base64')
-    var string = Buffer.from(unescape(encodeURIComponent(string))).toString('base64'),
-        charList = string.split(''),
-        uintArray = [];
-    for (var i = 0; i < charList.length; i++) {
-        uintArray.push(charList[i].charCodeAt(0));
-    }
-    return new Uint8Array(uintArray);
-}
 
 module.exports = router;

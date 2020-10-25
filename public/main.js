@@ -13,6 +13,7 @@ var url = self.location.host;
  */
 btn1.addEventListener("click", function(){
     var getKeys = new XMLHttpRequest();
+    //getKeys.open("GET", "http://localhost:9000/api/keys/getKeyPair");
     getKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/getKeyPair");
     getKeys.onload = function(){
         var keyPair = JSON.parse(getKeys.responseText);
@@ -31,6 +32,7 @@ btn1.addEventListener("click", function(){
  */
 btn2.addEventListener("click", function(){
     var genKeys = new XMLHttpRequest();
+    //genKeys.open("GET", "http://localhost:9000/api/keys/genKeyPair");
     genKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/genKeyPair");
     genKeys.onload = function(){
         var keyPair = JSON.parse(genKeys.responseText);
@@ -59,13 +61,12 @@ btn3.addEventListener("click", function(){
         "publicKey" : key
     };
     var myJSON = JSON.stringify(message);
+    //request.open("POST", "http://localhost:9000/api/encryption/");
     request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/encryption/");
     request.setRequestHeader("Content-type", "application/json");
     request.onload = function(){
-        // var enc = new TextDecoder("utf-8");
-        // var result = enc.decode(request.responseText);
         document.getElementById("ciphertext").value="";
-        renderText("ciphertext", request.responseText);
+        renderText("ciphertext", textToList(request.responseText));
     }
     request.send(myJSON);
    }else{
@@ -91,12 +92,10 @@ btn4.addEventListener("click", function(){
             "privateKey" : key
         };
         var myJSON = JSON.stringify(message);
+        //request.open("POST", "http://localhost:9000/api/decryption/");
         request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/decryption/");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
-            // var enc = new TextDecoder("utf-8");
-            // var result = enc.decode(request.responseText);
-            document.getElementById("plaintext").value="";
             renderText("plaintext", request.responseText);
         }
         request.send(myJSON);
@@ -167,4 +166,14 @@ function getPriKey(key){
         "dp" : dp
     }
     return privateKey
+}
+function textToList(text){
+    var ciphertext = JSON.parse(text)
+    //var ciphertext = text;
+    //console.log(ciphertext);
+    var result = new Array();
+    for(var i = 0; i<256;i++){
+        result.push(ciphertext[i]);
+    }
+    return result
 }
