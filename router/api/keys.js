@@ -7,14 +7,23 @@ const router = express.Router();
   response with a randomly choosed stored JWK pair
 */
 router.get('/getKeyPair', (req, res) => {
-    res.json(keys.getRandomKey().keys[0]);
+    try{
+      res.status(200).json(keys.getRandomKey().keys[0])
+    }catch{(error) =>{
+      console.log(error);
+      return res.status(400).json({msg:'Error'});
+    }};
 })
 
 /*API for "GET: ./api/genKeyPair" request
   response with a randomly generated JWK pair
 */
 router.get('/genKeyPair', (req, res) => {
-    usingKey.genKey().then((key) => res.send(key));
+    usingKey.genKey().then((key) => res.status(200).send(key))
+    .catch((error) =>{
+      console.log(error);
+      return res.status(400).json({msg:'Error'});
+    });
  })
 
  module.exports = router;

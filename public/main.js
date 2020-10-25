@@ -16,11 +16,13 @@ btn1.addEventListener("click", function(){
     //getKeys.open("GET", "http://localhost:9000/api/keys/getKeyPair");
     getKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/getKeyPair");
     getKeys.onload = function(){
-        var keyPair = JSON.parse(getKeys.responseText);
-        clearKeyArea();
-        renderPublicKey(publicKey, keyPair);
-        renderPrivateKey(privateKey, keyPair);
-        keyUsing = keyPair;
+        if(this.status == 200){
+            var keyPair = JSON.parse(getKeys.responseText);
+            clearKeyArea();
+            renderPublicKey(publicKey, keyPair);
+            renderPrivateKey(privateKey, keyPair);
+            keyUsing = keyPair;
+        }
     }
     getKeys.send();
 });
@@ -35,11 +37,13 @@ btn2.addEventListener("click", function(){
     //genKeys.open("GET", "http://localhost:9000/api/keys/genKeyPair");
     genKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/genKeyPair");
     genKeys.onload = function(){
-        var keyPair = JSON.parse(genKeys.responseText);
-        clearKeyArea();
-        renderPublicKey(publicKey, keyPair);
-        renderPrivateKey(privateKey, keyPair);
-        keyUsing = keyPair;
+        if(this.status == 200){
+            var keyPair = JSON.parse(genKeys.responseText);
+            clearKeyArea();
+            renderPublicKey(publicKey, keyPair);
+            renderPrivateKey(privateKey, keyPair);
+            keyUsing = keyPair;
+        }
     }
     genKeys.send();
 });
@@ -65,8 +69,15 @@ btn3.addEventListener("click", function(){
     request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/encryption/");
     request.setRequestHeader("Content-type", "application/json");
     request.onload = function(){
-        document.getElementById("ciphertext").value="";
-        renderText("ciphertext", textToList(request.responseText));
+        if(this.status == 200){
+            document.getElementById("ciphertext").value="";
+            renderText("ciphertext", textToList(request.responseText));
+         }else if(this.status == 400){
+             document.getElementById("plaintext").value="";
+             document.getElementById("ciphertext").value="";
+             window.alert("The key pair is illegal!");
+         }
+
     }
     request.send(myJSON);
    }else{
@@ -96,7 +107,13 @@ btn4.addEventListener("click", function(){
         request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/decryption/");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
-            renderText("plaintext", request.responseText);
+            if(this.status == 200){
+               renderText("plaintext", this.responseText);
+            }else if(this.status == 400){
+                document.getElementById("plaintext").value="";
+                document.getElementById("ciphertext").value="";
+                window.alert("The ciphertext is illegal!");
+            }
         }
         request.send(myJSON);
     }else{

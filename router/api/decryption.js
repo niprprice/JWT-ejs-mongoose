@@ -21,7 +21,11 @@ router.post('/', (req,res) =>{
             var message = decoder.write(result);
             console.log(message);
             return message})
-        .then((message) => res.send(message));
+        .then((message) => res.status(200).send(message))
+        .catch((error) =>{
+            console.log(error);
+            return res.status(400).json({msg:'Error'});
+        });
 
     }catch(err){
         console.log(err);

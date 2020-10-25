@@ -19,7 +19,11 @@ router.post('/', (req,res) =>{
         usingKey.encrypt(plaintext, publicKey).then((result) => {
             console.log(result);
             return result
-        }).then((message) => res.send(message));
+        }).then((message) => res.status(200).send(message))
+        .catch((error) =>{
+            console.log(error);
+            return res.status(400).json({msg:'Error'});
+        });
 
     }catch(err){
         console.log(err);
