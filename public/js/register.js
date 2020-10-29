@@ -36,7 +36,7 @@ btn1.addEventListener("click", function(){
                 var message = JSON.parse(request.responseText)
                 window.alert(message.msg);
                 clearArea();
-                //window.alert(msgExtract("1"));
+
             }
         }
         request.send(myJSON);
@@ -84,11 +84,6 @@ function clearArea(){
     document.getElementById("password-signUp").value = '';
     document.getElementById("email-signIn").value = '';
     document.getElementById("password-signIn").value = '';
-}
-
-function msgExtract(message){
-    const myJSON = JSON.parse(message);
-    return myJSON.msg;
 }
 
 //Check the format of the user registration
