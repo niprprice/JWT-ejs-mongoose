@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleKeyGenerator</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+    <header id="main-header">
+        <div class="container">
+            <h1>A simple example of asymmetric encryption</h1>
+        </div>
+    </header>
+    <nav id="main">
+        <%- include('./keyPair/keyPair.ejs') %>
+        <%- include('./enc_dec/enc_dec.ejs') %>
+    </nav>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <!-- <% if (userData) { %>
+        <script type="text/javascript" src="/js/main.js"></script>
+    <% } %> -->
+
+    <!-- <script type="text/javascript">
+        var data = JSON.parse('<%- JSON.stringify(data) %>');
+        loadJWT(data); 
+    </script> -->
+</body>
+</html>

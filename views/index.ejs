@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleKeyGenerator</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+    <% if (typeof(signUpSuccess) !== "undefined") { %> 
+        <script>alert('Signed up successfully!');</script> 
+     <% } %>
+    <% if (typeof(emailExist) !== "undefined") { %> 
+        <script>alert('The email has already existed!');</script> 
+     <% } %>
+    <header id="main-header">
+        <div class="container">
+            <h1>A simple example of asymmetric encryption</h1>
+        </div>
+    </header>
+    <nav id="log">
+        <%- include('./account/account.ejs') %>
+    </nav>
+    <script type="text/javascript" src="/js/register.js"></script>
+</body>
+</html>
