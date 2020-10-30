@@ -23,9 +23,9 @@ router.post("/signup", (req,res,next) => {
                 if(user){
                     //If user exist
                     console.log('Email is already registered!');
-                    //res.render('index', {emailExist: "exist"});
+                    res.render('index', {emailExist: "Email existed"});
                     //throw new Error('Email is already registered!');
-                    return res.status(400).json({msg:'Email is already registered!'});
+                    //res.status(400).json({msg:'Email is already registered!'});
                 }else {
                     //Default HMAC SHA256 signature
                     const token = jwt.sign(password, email);
@@ -39,7 +39,7 @@ router.post("/signup", (req,res,next) => {
                     })
                     console.log(newUser);
                     //save user
-                    return newUser.save().then(result => res.status(200).json({msg:'Success!'}));
+                    newUser.save().then(result => res.status(200).json({msg:'Success!'}));
                 }
             })
             .catch(err => {

@@ -1,6 +1,5 @@
 var btn1 = document.getElementById("signUp");
 var btn2 = document.getElementById("signIn");
-
 /*Use the SignUp API, 
   send "POST: ./api/register/signup/" request with username, email and password.
   When response, alert with message.
@@ -33,9 +32,9 @@ btn1.addEventListener("click", function(){
                 window.alert("Congratulation! Now you can sign in!");
                 clearArea();
             }else if(this.status == 400){
-                var message = JSON.parse(request.responseText)
+                var message = JSON.parse(request.responseText);
                 window.alert(message.msg);
-                clearArea();
+                //clearArea();
 
             }
         }
@@ -84,6 +83,10 @@ function clearArea(){
     document.getElementById("password-signUp").value = '';
     document.getElementById("email-signIn").value = '';
     document.getElementById("password-signIn").value = '';
+}
+
+function notify(msg){
+    document.getElementById("notification").value = msg;
 }
 
 //Check the format of the user registration

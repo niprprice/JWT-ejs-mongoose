@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 //     res.render('index');
 // })
 const indexRouter = require('./router/index');
-app.use('/', indexRouter);
+
 
 //Database configuration
 const db = require('./DBconfig/DBkey.js').MongoURI;
@@ -28,10 +28,25 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 
 //Routing
+app.use('/api/register', require('./router/api/register.js'));
 app.use('/api/keys', require('./router/api/keys.js'));
 app.use('/api/encryption', require('./router/api/encryption.js'));
 app.use('/api/decryption', require('./router/api/decryption.js'));
-app.use('/api/register', require('./router/api/register.js'));
+app.use('/', indexRouter);
+app.use((req, res, next) => {
+    const error = new Error("Not found");
+    error.status = 404;
+    next(error);
+  });
+  
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    res.json({
+      error: {
+        message: error.message
+      }
+    });
+  });
 
 app.listen(PORT, () => console.log("Server started"));
 
