@@ -23,7 +23,7 @@ btn1.addEventListener("click", function(){
     var myJSON = JSON.stringify(message);
     console.log(myJSON);
     //getKeys.open("POST", "http://localhost:9000/api/keys/getKeyPair");
-    getKeys.open("POST", "https://mighty-waters-04779.herokuapp.com/api/keys/getKeyPair");
+    getKeys.open("POST", "https://creepy-moonlight-79600.herokuapp.com/api/keys/getKeyPair");
     getKeys.setRequestHeader("Content-type", "application/json");
     getKeys.onload = function(){
         if(this.status == 200){
@@ -48,7 +48,7 @@ btn1.addEventListener("click", function(){
 btn2.addEventListener("click", function(){
     var genKeys = new XMLHttpRequest();
     //genKeys.open("GET", "http://localhost:9000/api/keys/genKeyPair");
-    genKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/genKeyPair");
+    genKeys.open("GET", "https://creepy-moonlight-79600.herokuapp.com/api/keys/genKeyPair");
     genKeys.onload = function(){
         if(this.status == 200){
             var keyPair = JSON.parse(genKeys.responseText);
@@ -79,7 +79,7 @@ btn3.addEventListener("click", function(){
     };
     var myJSON = JSON.stringify(message);
     //request.open("POST", "http://localhost:9000/api/encryption/");
-    request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/encryption/");
+    request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/api/encryption/");
     request.setRequestHeader("Content-type", "application/json");
     request.onload = function(){
         if(this.status == 200){
@@ -117,7 +117,7 @@ btn4.addEventListener("click", function(){
         };
         var myJSON = JSON.stringify(message);
         //request.open("POST", "http://localhost:9000/api/decryption/");
-        request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/decryption/");
+        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/decryption/");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){
@@ -155,7 +155,7 @@ btn5.addEventListener("click", function(){
         };
         var myJSON = JSON.stringify(message);
         //request.open("POST", "http://localhost:9000/api/keys/storekeys/");
-        request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/keys/storekeys/");
+        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/storekeys/");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){
