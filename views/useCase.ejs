@@ -10,10 +10,11 @@
     <header id="main-header">
         <div class="container">
             <h1>A simple example of asymmetric encryption</h1>
-            <p><%- user %></p>
+            <h2><%- user %></h2>
         </div>
     </header>
     <nav id="main">
+        <input id="token" type = "hidden" value = <%- token %>></input>
         <%- include('./keyPair/keyPair.ejs') %>
         <%- include('./enc_dec/enc_dec.ejs') %>
     </nav>

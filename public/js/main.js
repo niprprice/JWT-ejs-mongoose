@@ -4,6 +4,7 @@ var btn1 = document.getElementById("getKeys");
 var btn2 = document.getElementById("genKeys");
 var btn3 = document.getElementById("encrypt");
 var btn4 = document.getElementById("decrypt");
+var btn5 = document.getElementById("storeKeys");
 var keyUsing; //The JWK pair in current usage
 // var userData = JSON.parse('<%- JSON.stringify(user) %>'); 
 
@@ -13,9 +14,17 @@ var keyUsing; //The JWK pair in current usage
   The JWK is randomly choosed from data stored in server.
  */
 btn1.addEventListener("click", function(){
+    var token = document.getElementById("token").value;
+    console.log(token);
     var getKeys = new XMLHttpRequest();
-    getKeys.open("GET", "http://localhost:9000/api/keys/getKeyPair");
-    //getKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/getKeyPair");
+    var message = {
+        "token" : token,
+    };
+    var myJSON = JSON.stringify(message);
+    console.log(myJSON);
+    getKeys.open("POST", "http://localhost:9000/api/keys/getKeyPair");
+    //getKeys.open("POST", "https://mighty-waters-04779.herokuapp.com/api/keys/getKeyPair");
+    getKeys.setRequestHeader("Content-type", "application/json");
     getKeys.onload = function(){
         if(this.status == 200){
             var keyPair = JSON.parse(getKeys.responseText);
@@ -23,9 +32,12 @@ btn1.addEventListener("click", function(){
             renderPublicKey(publicKey, keyPair);
             renderPrivateKey(privateKey, keyPair);
             keyUsing = keyPair;
+        }else if(this.status == 400){
+            var msg = JSON.parse(this.responseText);
+            window.alert(msg.msg);
         }
     }
-    getKeys.send();
+    getKeys.send(myJSON);
 });
 
 /*Use the genKey API,
@@ -120,6 +132,35 @@ btn4.addEventListener("click", function(){
     }else{
         window.alert("You need to get a pair of keys");
         document.getElementById("ciphertext").value="";
+    }
+});
+
+btn5.addEventListener("click", function(){
+    if((!keyUsing) || (document.getElementById("pubicKey").value =="") || (document.getElementById("privateKey").value =="")){
+        window.alert("You need to get a key pair first!");
+       }else{
+        //window.location.reload();
+        var token = document.getElementById("token").value;
+        console.log(token);
+        const key = keyUsing;
+        var request = new XMLHttpRequest();
+        var message = {
+            "token" : token,
+            "key" : key
+        };
+        var myJSON = JSON.stringify(message);
+        request.open("POST", "http://localhost:9000/api/keys/storekeys/");
+        //request.open("POST", "https://mighty-waters-04779.herokuapp.com/api/keys/storekeys/");
+        request.setRequestHeader("Content-type", "application/json");
+        request.onload = function(){
+            if(this.status == 200){
+               window.alert("Success!");
+            }else if(this.status == 400){
+                message = JSON.parse(this.responseText);
+                window.alert(message.msg);
+            }
+        }
+        request.send(myJSON);
     }
 });
 

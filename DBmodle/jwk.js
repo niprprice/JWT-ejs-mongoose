@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const keySchema = new mongoose.Schema({
-    username:{
+    token:{
         type : String,
         required : true
     },
@@ -13,4 +13,4 @@ const keySchema = new mongoose.Schema({
 
 const key = mongoose.model('key', keySchema);
 
-module.exports = {key};
+module.exports = key;

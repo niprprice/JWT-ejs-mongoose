@@ -26,6 +26,7 @@ btn1.addEventListener("click", function(){
         };
         var myJSON = JSON.stringify(message);
         request.open("POST", "http://localhost:9000/register/signup");
+        //request.open("POST", "https://mighty-waters-04779.herokuapp.com/register/signup");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){
@@ -60,26 +61,28 @@ btn2.addEventListener("click", function(){
             "password" : password
         };
         var myJSON = JSON.stringify(message);
-        // request.onreadystatechange = function() {
-        //     if (request.readyState == 4 && request.status == 200) {
-        //       callback(request.responseText);
-        //     }
-        //   };
         request.open("POST", "http://localhost:9000/register/signin");
+        //request.open("POST", "https://mighty-waters-04779.herokuapp.com/register/signin");
         request.setRequestHeader("Content-type", "application/json");
-        request.onload = function(){
-            if(this.status == 200){
+        request.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
                 var result = JSON.parse(request.responseText)
-                //window.alert("Success!");
-                //clearArea();
-                window.location = "http://localhost:9000/api/";
+                const tk = result.token
+                console.log(tk);
+                window.alert("Success!");
                 var req = new XMLHttpRequest();
-                req.open("GET", "http://localhost:9000/api/");
+                req.open("POST", "http://localhost:9000/api/");
+                //req.open("POST", "https://mighty-waters-04779.herokuapp.com/api/");
                 req.setRequestHeader("Content-type", "application/json");
                 var msg = {
-                    "token":result.token
+                    "token" : tk
                 };
                 var send = JSON.stringify(msg);
+                req.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        document.write(this.responseText);
+                    }
+                } 
                 req.send(send);
             }else if(this.status == 400){
                 //var message = JSON.parse(request.responseText)

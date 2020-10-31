@@ -4,9 +4,6 @@ const jwt = require('jsonwebtoken')
 //User model
 const User = require('../../DBmodle/user.js');
 
-//router.get("/signup", (req,res) => res.render('index'));
-//router.get("/signin", (req,res) => res.render('index'));
-
 router.post("/signup", (req,res) => {
     try{
         console.log('User:' + JSON.stringify(req.body));
