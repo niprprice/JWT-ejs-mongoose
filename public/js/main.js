@@ -123,12 +123,6 @@ btn4.addEventListener("click", function(){
     }
 });
 
-btn6.addEventListener("click", function(){
-    var genKeys = new XMLHttpRequest();
-    genKeys.open("GET", "http://localhost:9000/test");
-    //genKeys.open("GET", "https://mighty-waters-04779.herokuapp.com/api/keys/genKeyPair");
-});
-
 function renderText(id, data){
     document.getElementById(id).value= data;
 }

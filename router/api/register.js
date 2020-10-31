@@ -4,10 +4,10 @@ const jwt = require('jsonwebtoken')
 //User model
 const User = require('../../DBmodle/user.js');
 
-router.get("/signup", (req,res) => res.render('index'));
-router.get("/signin", (req,res) => res.render('index'));
+//router.get("/signup", (req,res) => res.render('index'));
+//router.get("/signin", (req,res) => res.render('index'));
 
-router.post("/signup", (req,res,next) => {
+router.post("/signup", (req,res) => {
     try{
         console.log('User:' + JSON.stringify(req.body));
         const { username, email, password } = req.body;
@@ -15,17 +15,14 @@ router.post("/signup", (req,res,next) => {
             console.log('Please fill in all fields');
             res.status(400).json({msg : 'Please fill in all fields'});
         }else{
-            // signUp(username, email, password).then(result =>{
-            //     res.status(result.code).json({msg : result.msg});
-            // });
             User.findOne({ email : email }).exec()
             .then(user =>{
                 if(user){
                     //If user exist
                     console.log('Email is already registered!');
-                    res.render('index', {emailExist: "Email existed"});
+                    //res.render('index', {emailExist: "Email existed"});
                     //throw new Error('Email is already registered!');
-                    //res.status(400).json({msg:'Email is already registered!'});
+                    res.status(400).json({msg:'Email is already registered!'});
                 }else {
                     //Default HMAC SHA256 signature
                     const token = jwt.sign(password, email);
@@ -68,6 +65,8 @@ router.post("/signin", (req,res) => {
                     var message = {token : token};
                     console.log(message);
                     res.status(200).json(message);
+                    //res.redirect('/api');
+                    //res.render("useCase");
                 }else {
                     res.status(400).json({msg: "Error"});
                 }
@@ -84,49 +83,49 @@ router.post("/signin", (req,res) => {
 });
 
 
-async function signUp(username, email, password){
-    var result;
-    user = await User.findOne({ email : email }).exec()
-    if(user){
-        //If user exist
-        console.log('Email is already registered!');
-        result = { code:400, msg:'Email is already registered!' };
-    }else{
-        //Default HMAC SHA256 signature
-        const token = jwt.sign(password, email);
-        console.log(token);
-        const newUser = new User({
-            username : username,
-            email : email,
-            password : password,
-            token : token
-        })
-        console.log(newUser);
-        //save user
-        await newUser.save();
-        result = { code:200, msg:'Success!' };
-    }
-return result;
-}
+// async function signUp(username, email, password){
+//     var result;
+//     user = await User.findOne({ email : email }).exec()
+//     if(user){
+//         //If user exist
+//         console.log('Email is already registered!');
+//         result = { code:400, msg:'Email is already registered!' };
+//     }else{
+//         //Default HMAC SHA256 signature
+//         const token = jwt.sign(password, email);
+//         console.log(token);
+//         const newUser = new User({
+//             username : username,
+//             email : email,
+//             password : password,
+//             token : token
+//         })
+//         console.log(newUser);
+//         //save user
+//         await newUser.save();
+//         result = { code:200, msg:'Success!' };
+//     }
+// return result;
+// }
 
-router.get("/", (req, res, next) => {
-    Product.find().exec()
-      .then(docs => {
-        console.log(docs);
-          if (docs.length >= 0) {
-            res.status(200).json(docs);
-          } else {
-              res.status(404).json({
-                  message: 'No entries found'
-              });
-          }
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({
-          error: err
-        });
-      });
-  });
+// router.get("/", (req, res, next) => {
+//     Product.find().exec()
+//       .then(docs => {
+//         console.log(docs);
+//           if (docs.length >= 0) {
+//             res.status(200).json(docs);
+//           } else {
+//               res.status(404).json({
+//                   message: 'No entries found'
+//               });
+//           }
+//       })
+//       .catch(err => {
+//         console.log(err);
+//         res.status(500).json({
+//           error: err
+//         });
+//       });
+//   });
 
 module.exports = router;

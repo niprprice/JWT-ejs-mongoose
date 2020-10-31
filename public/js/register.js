@@ -17,7 +17,7 @@ btn1.addEventListener("click", function(){
     }else{
         var username = document.getElementById("username-signUp").value;
         var email = document.getElementById("email-signUp").value;
-        var password= document.getElementById("password-signUp").value;
+        var password = document.getElementById("password-signUp").value;
         var request = new XMLHttpRequest();
         var message = {
             "username" : username,
@@ -25,16 +25,16 @@ btn1.addEventListener("click", function(){
             "password" : password
         };
         var myJSON = JSON.stringify(message);
-        request.open("POST", "http://localhost:9000/api/register/signup");
+        request.open("POST", "http://localhost:9000/register/signup");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){
                 window.alert("Congratulation! Now you can sign in!");
                 clearArea();
             }else if(this.status == 400){
-                var message = JSON.parse(request.responseText);
-                window.alert(message.msg);
-                //clearArea();
+                var msg = JSON.parse(request.responseText);
+                window.alert(msg.msg);
+                clearArea();
 
             }
         }
@@ -60,16 +60,30 @@ btn2.addEventListener("click", function(){
             "password" : password
         };
         var myJSON = JSON.stringify(message);
-        request.open("POST", "http://localhost:9000/api/register/signin");
+        // request.onreadystatechange = function() {
+        //     if (request.readyState == 4 && request.status == 200) {
+        //       callback(request.responseText);
+        //     }
+        //   };
+        request.open("POST", "http://localhost:9000/register/signin");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){
-                var message = JSON.parse(request.responseText)
-                window.alert("Your token:" + message.token);
-                clearArea();
+                var result = JSON.parse(request.responseText)
+                //window.alert("Success!");
+                //clearArea();
+                window.location = "http://localhost:9000/api/";
+                var req = new XMLHttpRequest();
+                req.open("GET", "http://localhost:9000/api/");
+                req.setRequestHeader("Content-type", "application/json");
+                var msg = {
+                    "token":result.token
+                };
+                var send = JSON.stringify(msg);
+                req.send(send);
             }else if(this.status == 400){
-                var message = JSON.parse(request.responseText)
-                window.alert(message.msg);
+                //var message = JSON.parse(request.responseText)
+                window.alert("Invalid!");
                 clearArea();
             }
         }
