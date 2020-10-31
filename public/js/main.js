@@ -11,7 +11,7 @@ var keyUsing; //The JWK pair in current usage
 /*Use the getKey API,
   send "GET: ./api/getKeyPair" request.
   When response, render the HTML with JWK key pair.
-  The JWK is randomly choosed from data stored in server.
+  The JWK is the unique JWK stored in database by unique user.
  */
 btn1.addEventListener("click", function(){
     var token = document.getElementById("token").value;
@@ -135,11 +135,16 @@ btn4.addEventListener("click", function(){
     }
 });
 
+
+/**Use /storekeys API
+ * Store a unique JWK key pair in the database
+ * If there is already a stored key,
+ * it will be updated.
+ */
 btn5.addEventListener("click", function(){
     if((!keyUsing) || (document.getElementById("pubicKey").value =="") || (document.getElementById("privateKey").value =="")){
         window.alert("You need to get a key pair first!");
        }else{
-        //window.location.reload();
         var token = document.getElementById("token").value;
         console.log(token);
         const key = keyUsing;

@@ -37,7 +37,10 @@ router.get('/genKeyPair', (req, res) => {
   });
 })
 
-
+/*API for "POST: ./api/storekeys" request
+  response with a message if the process suceed.
+  If there is a key stored, it will be updated.
+*/
 router.post('/storekeys', (req, res) => {
   try{
     var token = req.body.token;

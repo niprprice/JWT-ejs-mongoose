@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken')
 //User model
 const User = require('../../DBmodle/user.js');
 
+
+/**API for "POST: ./signup" request.
+ * return with message if the registration succeeded.
+ */
 router.post("/signup", (req,res) => {
     try{
         console.log('User:' + JSON.stringify(req.body));
@@ -46,6 +50,10 @@ router.post("/signup", (req,res) => {
     }};
 })
 
+
+/**API for "POST: ./signIn" request.
+ * return with message if the registration succeeded.
+ */
 router.post("/signin", (req,res) => {
     try{
         console.log('User:' + JSON.stringify(req.body));

@@ -7,8 +7,6 @@ const ejs = require('ejs');
 
 app.use(express.static(__dirname + '/public'));
 
-//app.set('view engine', 'html');
-//app.engine('html', ejs.__express);
 app.set('view engine', 'ejs');
 
 const indexRouter = require('./router/index');

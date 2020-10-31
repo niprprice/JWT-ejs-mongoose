@@ -3,6 +3,10 @@ const router = express.Router();
 //User model
 const User = require('../DBmodle/user.js');
 
+/**API for routing the registration page to function page with crypto methods.
+ * Return with a rendered page.
+ */
+
 router.post('', (req,res) =>{
     try{
         if(req.body.token){
