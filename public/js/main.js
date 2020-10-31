@@ -117,7 +117,7 @@ btn4.addEventListener("click", function(){
         };
         var myJSON = JSON.stringify(message);
         //request.open("POST", "http://localhost:9000/api/decryption/");
-        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/decryption");
+        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/api/decryption");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){
