@@ -79,7 +79,7 @@ btn3.addEventListener("click", function(){
     };
     var myJSON = JSON.stringify(message);
     //request.open("POST", "http://localhost:9000/api/encryption/");
-    request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/api/encryption/");
+    request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/api/encryption");
     request.setRequestHeader("Content-type", "application/json");
     request.onload = function(){
         if(this.status == 200){
@@ -117,7 +117,7 @@ btn4.addEventListener("click", function(){
         };
         var myJSON = JSON.stringify(message);
         //request.open("POST", "http://localhost:9000/api/decryption/");
-        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/decryption/");
+        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/decryption");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){
@@ -155,7 +155,7 @@ btn5.addEventListener("click", function(){
         };
         var myJSON = JSON.stringify(message);
         //request.open("POST", "http://localhost:9000/api/keys/storekeys/");
-        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/storekeys/");
+        request.open("POST", "https://creepy-moonlight-79600.herokuapp.com/storekeys");
         request.setRequestHeader("Content-type", "application/json");
         request.onload = function(){
             if(this.status == 200){

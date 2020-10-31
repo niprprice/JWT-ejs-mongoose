@@ -8,7 +8,7 @@ const { StringDecoder } = require('string_decoder');
   response with the ciphertext in Unit8Array format.
   Description about JWK and encryption in https://tools.ietf.org/html/rfc7638
 */
-router.post('/', (req,res) =>{
+router.post('', (req,res) =>{
     try{
         console.log("Plaintext: " + String(req.body.plaintext));
         plaintext = new Uint8Array(Buffer.from(req.body.plaintext));

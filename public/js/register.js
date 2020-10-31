@@ -71,8 +71,8 @@ btn2.addEventListener("click", function(){
                 console.log(tk);
                 window.alert("Success!");
                 var req = new XMLHttpRequest();
-                //req.open("POST", "http://localhost:9000/api/");
-                req.open("POST", "https://creepy-moonlight-79600.herokuapp.com/api/");
+                req.open("POST", "http://localhost:9000/api/");
+                //req.open("POST", "https://creepy-moonlight-79600.herokuapp.com/api/");
                 req.setRequestHeader("Content-type", "application/json");
                 var msg = {
                     "token" : tk
